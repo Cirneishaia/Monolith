@@ -115,7 +115,9 @@ public sealed partial class SalvageSystem
             }
 
             var nearbyGrids = new List<Entity<MapGridComponent>>();
-            _mapSystem.FindGridsIntersecting(xform.MapID, bounds, ref nearbyGrids);
+            // includeMap: false — after IMapManager removal, map-as-grid entities would
+            // otherwise always fail the proximity check on some maps.
+            _mapSystem.FindGridsIntersecting(xform.MapID, bounds, ref nearbyGrids, includeMap: false);
             foreach (var other in nearbyGrids)
             {
                 if (other.Owner == grid ||

@@ -229,8 +229,9 @@ public sealed partial class SalvageSystem
 
         component.ActiveMission = 0;
         component.Cooldown = true;
-        if (shuttle != null) // Frontier
-            UpdateConsoles(shuttle.Value, component); // Frontier
+        // Frontier: 4th arg is owning station (misnamed shuttle at call sites)
+        if (shuttle != null)
+            UpdateConsoles(shuttle.Value, component);
     }
 
     /// <summary>

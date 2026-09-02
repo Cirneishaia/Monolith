@@ -38,7 +38,6 @@ using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
 using Robust.Shared.Timing;
 using Robust.Shared.GameObjects;
-using Content.Shared._Crescent.SpaceBiomes;
 
 namespace Content.Server.Salvage;
 
@@ -116,11 +115,25 @@ public sealed class SpawnSalvageMissionJob : Job<bool>
     protected override async Task<bool> Process()
     {
         // Frontier: gracefully handle expedition failures
-        bool success = true;
+        bool success = false;
         string? errorStackTrace = null;
         try
         {
-            await InternalProcess().ContinueWith((t) => { success = false; errorStackTrace = t.Exception?.InnerException?.StackTrace; }, TaskContinuationOptions.OnlyOnFaulted);
+            // Do NOT use ContinueWith(OnlyOnFaulted): awaiting that after a successful
+            // InternalProcess cancels the continuation and throws TaskCanceledException,
+            // which used to make every "successful" expedition look failed / flake out.
+            success = await InternalProcess();
+        }
+        catch (OperationCanceledException)
+        {
+            // Job was cancelled (round restart, etc.) — clean up in finally.
+            success = false;
+            throw;
+        }
+        catch (Exception e)
+        {
+            success = false;
+            errorStackTrace = e.ToString();
         }
         finally
         {
@@ -134,7 +147,8 @@ public sealed class SpawnSalvageMissionJob : Job<bool>
                 if (_entManager.TryGetComponent<SalvageExpeditionComponent>(mapUid, out var salvage))
                     salvage.Station = EntityUid.Invalid;
 
-                _entManager.QueueDeleteEntity(mapUid);
+                if (mapUid.IsValid())
+                    _entManager.QueueDeleteEntity(mapUid);
             }
         }
         return success;
