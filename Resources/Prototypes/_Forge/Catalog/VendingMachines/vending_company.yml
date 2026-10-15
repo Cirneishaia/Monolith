@@ -37,16 +37,22 @@
   startingInventory:
     ClothingOuterHardsuitUIPilot: 4
     ClothingOuterHardsuitUllmanEngineer: 3
-    ClothingUniformJumpsuitSalvageSpecialist: 4294967295
+    ClothingHeadHatBeretUI: 4294967295
+    ClothingHeadHatCapUI: 4294967295
+    ClothingUniformJumpsuitUI: 4294967295
+    ClothingUniformShirtUI: 4294967295
+    ClothingEyesUIGoogles: 4294967295
     ClothingNeckUllimanOvercoat: 4294967295
-    ClothingNeckHeavyUllimanOvercoat: 2
+    ClothingNeckCloakUllmanPoncho: 4294967295
+    ClothingNeckHeavyUllimanOvercoat: 4294967295
+    ClothingNeckMantleUI: 4294967295
+    ClothingBeltWebbingsNormalUi: 4294967295
+    ClothingBeltWebbingsBigUi: 4294967295
     WeaponPistolUllmanSmartMagnumMK5: 1
     TelecomServerFlatpack: 1
     EncryptionKeyUllmanIndustries: 2
     DisciplinesDiskUllman: 4
-    ClothingUniformJumpsuitUI: 4294967295
-    ClothingEyesUIGoogles: 4294967295
-    ClothingNeckCloakUllmanPoncho: 4
+    
 
 #region USSP
 - type: vendingMachineInventory
