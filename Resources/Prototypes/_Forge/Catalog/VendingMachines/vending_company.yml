@@ -82,6 +82,8 @@
     WeaponRifleSVS: 3 # Infinite
     CombatKnife: 6 # Infinite
     SurvivalKnife: 6 # Infinite
+    ClothingHeadHatBeretVdv: 4294967295
+    ClothingUniformJumpsuitVdvtyelnyazhka: 4294967295
     ClothingUniformUSSP: 6 # Infinite
     ClothingHeadsetUSSP: 6 # Infinite
     EncryptionKeyUssp: 6
